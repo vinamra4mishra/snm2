@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Count Page</title>
+     <script src="http://192.168.0.105:3000/chart"></script> 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script> -->
+    <style>
+        body {
+            background-color: #E6E6FA; /* Lavender */
+            color: #4B0082; /* Indigo for text */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            padding:5px;
+            color: #4B0082; /* Indigo */
+        }
+        
+        #countValue {
+            font-size: 58px;
+            color: #4B0082; /* Turquoise */
+        }
+        #human {
+            /* font-size: 5px; */
+            color: #4B0082; /* Turquoise */
+        }
+       /*  #chartContainer {
+            margin-top: 20px;
+        } */
+        #chartContainer {
+            width: 300px;
+            height: 350px;
+            /* height: 150px; */
+            margin: 0 auto;
+        }
+
+.container {
+    border: 5px solid black; /* Black border with 1px width */
+    padding: 5px; /* Optional: Add padding for spacing inside the border */
+  }
+  #percent{
+    padding:5px;
+    color: #4B0082; /* Indigo */
+  }
+  canvas {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="pno">
+            <h1>Have you ever experienced negative emotions when a friend purchased a larger car than yours?</h1>
+        </div>
+        <div class="stop">
+            <h1 id="countText">Count:</h1>
+        <div><span id="countValue">
+0</span> <span id="percent" >%</span> </div>
+<div><h1 id="human"></h1></div>
+
+        <!-- <div id="chartContainer"> 
+            <canvas id="myPieChart" width="300" height="300"></canvas>
+        </div> -->
+        <div id="chartContainer">
+            <!-- Bar Chart -->
+            <canvas id="barChart"></canvas>
+        </div>
+    </div></div>
+
+   <!--  <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var one = 100;
+            var two = 100;
+
+            // Get canvas element
+            var ctx = document.getElementById('myPieChart').getContext('2d');
+
+            // Initial Data
+            var data = {
+                labels: ['one', 'two'],
+                datasets: [{
+                    data: [one, two],
+                    backgroundColor: [
+                        '#4B0082', /* Indigo */
+                        '#40E0D0' /* Turquoise */
+                    ]
+                }]
+            };
+
+            // Create Pie chart
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: data
+            });
+
+            const countValue = document.getElementById('countValue');
+            const div = document.getElementById('pno');
+            const countValueElement = document.getElementById('countText');
+            const percent = document.getElementById('percent');
+            const human = document.getElementById('human');
+
+
+
+
+            const newHTML1 = `<h1>1-Have you ever experienced negative emotions when a friend purchased a larger car than yours?</h1>`;
+            const newHTML2 = `<h1>2-Have you ever felt envious when a colleague received a promotion instead of you?</h1>`;
+            const newHTML3 = `<h1>3-Do you ever feel disappointed when someone else gets recognized for their achievements instead of you?</h1>`;
+            const newHTML4 = `<h1>4-Have you ever felt resentful when a friend received more praise for their accomplishments than you did?</h1>`;
+            const newHTML5 = ``;
+
+            const eventSource = new EventSource('/updates');
+            eventSource.onmessage = (event) => {
+                const integers = JSON.parse(event.data);
+                console.log(integers);
+
+                if (integers[4] == 0) {
+                    div.innerHTML = newHTML1;
+                    countValueElement.textContent = 'Count:';
+                    percent.textContent = '';
+                    human.textContent = '';
+                    countValue.textContent = integers[0];
+                    myPieChart.data.datasets[0].data[0] = integers[0];
+                    myPieChart.update();
+                }
+                if (integers[4] == 1) {
+                    div.innerHTML = newHTML2;
+                    countValueElement.textContent = 'Count:';
+                    human.textContent = '';
+                    percent.textContent = '';
+                    countValue.textContent = integers[1];
+                    myPieChart.data.datasets[0].data[0] = integers[1];
+                    myPieChart.update();
+                }
+                if (integers[4] == 2) {
+                    div.innerHTML = newHTML3;
+                    countValueElement.textContent = 'Count:';
+                    human.textContent = '';
+                    percent.textContent = '';
+                    countValue.textContent = integers[2];
+                    myPieChart.data.datasets[0].data[0] = integers[2];
+                    myPieChart.update();
+                }
+                if (integers[4] == 3) {
+                    div.innerHTML = newHTML4;
+                    countValueElement.textContent = 'Count:';
+                    percent.textContent = '';
+                    human.textContent = '';
+                    countValue.textContent = integers[3];
+                    myPieChart.data.datasets[0].data[0] = integers[3];
+                    myPieChart.update();
+                }
+                if (integers[4] == 4) {
+                    div.innerHTML = newHTML5;
+                    countValueElement.textContent = 'Congratulations, you are among the ';
+                    percent.textContent = '%';
+                    human.textContent = 'of the human population';
+                    countValue.textContent = 10;
+                    myPieChart.data.datasets[0].data[0] =10;
+                    myPieChart.update(); 
+                }
+            };
+        });
+    </script> -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initial data for Bar Chart
+            var initialData = {
+                labels: ['Value 1'],
+                datasets: [{
+                    label: 'Variable',
+                    //data: [100],
+                     data: [10],
+                    backgroundColor: '#40E0D0',
+                    borderColor: '#4B0082',
+                    borderWidth: 1
+                }]
+            };
+
+            var initialData2 = {
+                labels: ['Value 2'],
+                datasets: [{
+                    label: 'Variable2',
+                    //data: [100],
+                     data: [10],
+                    backgroundColor: '#40E0D0',
+                    borderColor: '#4B0082',
+                    borderWidth: 1
+                }]
+            };
+
+            // Get canvas element
+            var barCtx = document.getElementById('barChart').getContext('2d');
+
+            // Create Bar Chart
+            var barChart = new Chart(barCtx, {
+                type: 'bar',
+                /* data: {
+                    labels: ['Value 1', 'Value 2'],
+                    datasets: [{
+                        label: 'Values',
+                        data: [10, 20], // Initial values
+                        backgroundColor: [
+                            '#40E0D0',
+                            '#4B0082'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                } */
+                data: initialData,
+                options: {
+                    maintainAspectRatio: false // Disable maintaining aspect ratio
+                }
+            });
+
+            const countValue = document.getElementById('countValue');
+            const div = document.getElementById('pno');
+            const countValueElement = document.getElementById('countText');
+            const percent = document.getElementById('percent');
+            const human = document.getElementById('human');
+
+            const newHTML1 = `<h1>1-Have you ever experienced negative emotions when a friend purchased a larger car than yours?</h1>`;
+            const newHTML2 = `<h1>2-Have you ever felt envious when a colleague received a promotion instead of you?</h1>`;
+            const newHTML3 = `<h1>3-Do you ever feel disappointed when someone else gets recognized for their achievements instead of you?</h1>`;
+            const newHTML4 = `<h1>4-Have you ever felt resentful when a friend received more praise for their accomplishments than you did?</h1>`;
+            const newHTML5 = ``;
+
+            const eventSource = new EventSource('/updates');
+
+            eventSource.onmessage = (event) => {
+                const integers = JSON.parse(event.data);
+                console.log(integers);
+
+                if (integers[4] == 0) {
+                    div.innerHTML = newHTML1;
+                    countValueElement.textContent = 'Count:';
+                    percent.textContent = '';
+                    human.textContent = '';
+                    countValue.textContent = integers[0];
+                    barChart.data.datasets[0].data = [integers[0]];
+                    barChart.update();
+                }
+                if (integers[4] == 1) {
+                    div.innerHTML = newHTML2;
+                    countValueElement.textContent = 'Count:';
+                    human.textContent = '';
+                    percent.textContent = '';
+                    countValue.textContent = integers[1];
+                    barChart.data.datasets[0].data = [integers[1]];
+                    barChart.update();
+                }
+                if (integers[4] == 2) {
+                    div.innerHTML = newHTML3;
+                    countValueElement.textContent = 'Count:';
+                    human.textContent = '';
+                    percent.textContent = '';
+                    countValue.textContent = integers[2];
+                    barChart.data.datasets[0].data = [integers[2]];
+                    barChart.update();
+                }
+                if (integers[4] == 3) {
+                    div.innerHTML = newHTML4;
+                    countValueElement.textContent = 'Count:';
+                    percent.textContent = '';
+                    human.textContent = '';
+                    countValue.textContent = integers[3];
+                    barChart.data.datasets[0].data = [integers[3]];
+                    barChart.update();
+                }
+                if (integers[4] == 4) {
+                    div.innerHTML = newHTML5;
+                    countValueElement.textContent = 'Congratulations, you are among the ';
+                    percent.textContent = '%';
+                    human.textContent = 'of the human population';
+                    countValue.textContent = 10;
+                    barChart.data.datasets[0].data =[10,20];
+                    barChart.update(); 
+                }
+            };
+            
+            // Function to update graph when button is clicked
+           /*  document.getElementById('updateButton').addEventListener('click', function () {
+                // Increment value on the plot
+                var newData = barChart.data.datasets[0].data.map(function (value) {
+                    return value + 1;
+                });
+
+                // Update data and re-render chart
+                barChart.data.datasets[0].data = newData;
+                barChart.update();
+            }); */
+        });
+    </script>
+</body>
+</html>

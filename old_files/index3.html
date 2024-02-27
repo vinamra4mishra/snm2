@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Count Page</title>
+      <!-- <script src="http://192.168.0.105:3000/chart"></script> -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"> -->
+
+   </script>
+    <style>
+        body {
+            background-color: #dca9da;
+            color: #4B0082; /* Indigo for text */
+            font-family: Arial, sans-serif;
+            margin: 10%;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            padding:5px;
+            color: #211111; /* Indigo */
+            font-size: 50px;
+        }
+        h3 {
+            padding:5px;
+            color: #211111;  /* Indigo */
+        }
+        h2 {
+            padding:5px;
+            color: #211111;  /* Indigo */
+            font-size: 35px;
+        }
+
+        #countValue {
+            font-size: 188px;
+            color: #211111;   /* Turquoise */
+        }
+        #human {
+            /* font-size: 5px; */
+            color: #4B0082; /* Turquoise */
+        }
+        #chartContainer {
+            width: 300px;
+            height: 350px;
+            margin: 0 auto;
+        }
+
+        .container {
+            border: 5px solid black; /* Black border with 1px width */
+            padding: 5px; /* Optional: Add padding for spacing inside the border */
+        }
+        #percent{
+            padding:5px;
+            color: #4B0082; /* Indigo */
+        }
+        canvas {
+            margin: 0 auto;
+            max-width: 200px;
+        }
+        .grid-container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 1fr;
+        height: 90vh;
+    }
+
+    .item {
+        border: 1px solid rgb(0, 0, 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        /* background-color: #2a0428; */
+    }
+
+    .item-1 {
+        grid-column: span 4;
+        grid-row: span 1;
+        padding: 5%;
+        margin: 2%;
+    }
+
+    .item-2 {
+        grid-column: span 2;
+        grid-row: span 1;
+        padding: 0%;
+        margin: 2%;
+
+         display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 1fr;
+    }
+
+    /* .item-3 {
+        grid-column: span 2;
+        grid-row: span 1;
+        padding: 5%;
+        margin: 2%;
+
+        display: grid;
+        grid-template-rows: auto 1fr auto; 
+        grid-template-columns: 1fr; 
+    } */
+    .lable1 {
+        max-width: 400px;
+        position: absolute;
+        top: 108%;
+        left: 71%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: rgb(0, 0, 0);
+        z-index: 1;
+        font-size: 16px;
+    }
+    .lable2 {
+        max-width: 200px;
+        position: absolute;
+        top: 89%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: rgb(0, 0, 0);
+        z-index: 1;
+        font-size: 16px;
+    }
+    .percentage_sym{
+        color: white;
+        font-size: 150px;
+    }
+    .pno2{
+        color: aqua;
+    }
+    #heading1{
+        font-size:60px;
+    }
+    </style>
+
+</head>
+<body>
+
+    <div class="grid-container">
+
+        <div class="item item-1">
+            <div id="pno">
+                <h1></h1>
+            </div>
+        </div>
+
+        <div class="item item-2">
+            <div class="pno3">
+                <h1 id="heading1" >NUMBER OF PEOPLE WHO AGREE</h1>
+            </div>
+            <div>
+                <span id="countValue">0</span> <span id="pno2" style="color: aliceblue; font-size: 100px;">%</span>
+            </div>
+            <div class="pno4" >
+                <h1 style="font-size: 90px;" id="heading2">NUMBER OF PEOPLE WHO AGREE</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div> -->
+
+        <!-- <div id="pno">
+            <h1>Have you ever experienced negative emotions when a friend purchased a larger car than yours?</h1>
+        </div> -->
+
+        <!-- <div>
+            <h1 id="countText">Count:</h1>
+        </div> -->
+
+        <!-- <div>
+            <span id="countValue">0</span> <span id="percent" >%</span>
+        </div> -->
+
+        <!-- <div>
+            <h1 id="human"></h1>
+        </div> -->
+
+        <!-- <div id="chartContainer">
+            <canvas id="barChart"></canvas>
+        </div> -->
+
+    <!-- </div> -->
+
+    <script>
+            const countValue = document.getElementById('countValue');
+            const div = document.getElementById('pno');
+            const div2 = document.getElementById('pno2');
+            const heading1 = document.getElementById("heading1");
+            const heading2 = document.getElementById("heading2");
+
+
+            const percent = document.getElementById('percentage_sym');
+            const human = document.getElementById('human');
+
+            const newHTML1 = `<h1>1 - Did you sleep yesterday with a roof over your head?</h1>`;
+            const newHTML2 = `<h1>2 - Did you have a full stomach when you went to bed
+yesterday?</h1>`;
+            const newHTML3 = `<h1>3 - Did you have clothes to cover your body today?</h1>`;
+            const newHTML4 = `<h1>4 - Do you feel thankful to God for anything in life?</h1>`;
+            const newHTML5 = `<h1 style="font-size: 60px;">CONGRATULATIONS !!! </h1>`;
+            const newHTML6 = ` `;
+            const newHTML7 = ``;               
+
+            const eventSource = new EventSource('/updates');
+
+            eventSource.onmessage = (event) => {
+                const integers = JSON.parse(event.data);
+                console.log(integers);
+
+                if (integers[4] == 0) {
+                    div.innerHTML = newHTML1;
+                    div2.innerHTML = newHTML6;
+                    heading1.innerText = "NUMBER OF PEOPLE WHO AGREE";
+                    heading2.innerText = "";
+
+                    let numberElement = integers[0];
+                    let number = parseInt(numberElement, 10);
+                    let formattedNumber = number.toLocaleString('en-US');
+
+                    countValue.textContent =formattedNumber;
+                    // barChart.data.datasets[0].data = [integers[0]];
+                    // barChart.update();
+                }
+                if (integers[4] == 1) {
+                    div.innerHTML = newHTML2;
+                    div2.innerHTML = newHTML6;
+                    heading1.innerText = "NUMBER OF PEOPLE WHO AGREE";
+                    heading2.innerText = "";
+
+                    let numberElement1 = integers[1];
+                    let number1 = parseInt(numberElement1, 10);
+                    let formattedNumber1 = number1.toLocaleString('en-US');
+
+                    countValue.textContent = formattedNumber1;
+
+                    // barChart.data.datasets[0].data = [integers[1]];
+                    // barChart.update();
+                }
+                if (integers[4] == 2) {
+                    div.innerHTML = newHTML3;
+                    div2.innerHTML = newHTML6;
+                    heading1.innerText = "NUMBER OF PEOPLE WHO AGREE";
+                    heading2.innerText = "";
+
+
+                    let numberElement2 = integers[2];
+                    let number2 = parseInt(numberElement2, 10);
+                    let formattedNumber2 = number2.toLocaleString('en-US');
+
+                    countValue.textContent = formattedNumber2;
+
+                    // barChart.data.datasets[0].data = [integers[2]];
+                    // barChart.update();
+                }
+                if (integers[4] == 3) {
+                    div.innerHTML = newHTML4;
+                    div2.innerHTML = newHTML6;
+                    heading1.innerText = "NUMBER OF PEOPLE WHO AGREE";
+                    heading2.innerText = "";
+
+                    let numberElement3 = integers[3];
+                    let number3 = parseInt(numberElement3, 10);
+                    let formattedNumber3 = number3.toLocaleString('en-US');
+
+                    countValue.textContent = formattedNumber3;
+
+                    // barChart.data.datasets[0].data = [integers[3]];
+                    // barChart.update();
+                }
+                if (integers[4] == 4) {
+                    div.innerHTML = newHTML5;
+                    div2.innerHTML = newHTML7;
+                    heading1.innerText = " ";
+                    heading2.innerText = " 750,000,000 Individuals worldwide do not have their basic necessities fulfilled, consider yourself FORTUNATE";
+
+                    /* let a=((integers[0]+integers[1]+integers[2]+integers[3])/(integers[0]+integers[1]+integers[2]+integers[3]+1000))*100;
+                    var roundedValue = a.toFixed(2);
+                    console.log(roundedValue); */
+
+                    countValue.textContent = '';
+                    // barChart.data.datasets[0].data = [750000000];
+                    // barChart.update();
+                }
+            };
+    </script>
+</body>
+</html>
