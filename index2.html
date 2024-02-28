@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
     <title>Count Page</title>
@@ -101,8 +101,8 @@
         margin: 2%;
 
         display: grid;
-        grid-template-rows: auto 1fr auto; 
-        grid-template-columns: 1fr; 
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 1fr;
     } */
     .lable1 {
         max-width: 400px;
@@ -198,14 +198,13 @@
             const percent = document.getElementById('percentage_sym');
             const human = document.getElementById('human');
 
-            const newHTML1 = `<h1 style="font-size: 100px;">1 - Did you sleep yesterday with a roof over your head?</h1>`;
-            const newHTML2 = `<h1 style="font-size: 100px;">2 - Did you have a full stomach when you went to bed
-yesterday?</h1>`;
-            const newHTML3 = `<h1 style="font-size: 100px;">3 - Did you have clothes to cover your body today?</h1>`;
-            const newHTML4 = `<h1 style="font-size: 100px;">4 - Do you feel thankful to God for anything in life?</h1>`;
+            const newHTML1 = `<h1 style="font-size: 100px;">Q1 - Did you sleep last night with a roof over your head?</h1>`;
+            const newHTML2 = `<h1 style="font-size: 100px;">Q2 - Did you have dinner before going to bed yesterday?</h1>`;
+            const newHTML3 = `<h1 style="font-size: 100px;">Q3 - Did you have clothes to wear today?</h1>`;
+            const newHTML4 = `<h1 style="font-size: 100px;">Q4 - Do you feel thankful to God for anything in your life?</h1>`;
             const newHTML5 = `<h1 style="font-size: 100px;">CONGRATULATIONS !!! </h1>`;
             const newHTML6 = ` `;
-            const newHTML7 = ``;               
+            const newHTML7 = ``;
 
             const eventSource = new EventSource('/updates');
 
@@ -277,7 +276,7 @@ yesterday?</h1>`;
                     div.innerHTML = newHTML5;
                     div2.innerHTML = newHTML7;
                     heading1.innerText = " ";
-                    heading2.innerText = " 750,000,000 Individuals worldwide do not have their basic necessities fulfilled, consider yourself FORTUNATE";
+                    heading2.innerText = " 750 million individuals worldwide do not have their basic necessities fulfilled, consider yourself Fortunate!";
 
                     /* let a=((integers[0]+integers[1]+integers[2]+integers[3])/(integers[0]+integers[1]+integers[2]+integers[3]+1000))*100;
                     var roundedValue = a.toFixed(2);
