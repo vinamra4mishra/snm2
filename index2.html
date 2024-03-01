@@ -1,193 +1,221 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
     <title>Count Page</title>
-      <!-- <script src="http://192.168.0.105:3000/chart"></script> -->
-   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"> -->
-
-   </script>
+    <script src="http://192.168.0.104:3000/chart"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>-->
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #dca9da;
-            color: #4B0082; /* Indigo for text */
+            background-color: #310e2f;
+            color: #000;
+            /* Indigo for text */
             font-family: Arial, sans-serif;
-            margin: 10%;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            margin: 0;
+            padding: 6vh 6vh 4vh 6vh;
             text-align: center;
         }
+
+        #chartContainer {
+            height: 80%;
+            width: 67%;
+            margin: 10px auto;
+            vertical-align: middle;
+        }
+
         h1 {
-            padding:5px;
-            color: #211111; /* Indigo */
+            padding: 0;
+            margin: 0;
+            line-height: 1.25em;
+            color: #000;
+            /* Indigo */
             font-size: 50px;
         }
+
         h3 {
-            padding:5px;
-            color: #211111;  /* Indigo */
+            padding: 5px;
+            color: #000;
+            /* Indigo */
         }
+
         h2 {
-            padding:5px;
-            color: #211111;  /* Indigo */
+            padding: 0;
+            color: #000;
+            /* Indigo */
             font-size: 35px;
+            margin: 0;
         }
 
         #countValue {
-            font-size: 240px;
-            color: #211111;   /* Turquoise */
-        }
-        #human {
-            /* font-size: 5px; */
-            color: #4B0082; /* Turquoise */
-        }
-        #chartContainer {
-            width: 300px;
-            height: 350px;
-            margin: 0 auto;
+            font-size: 188px;
+            color: #000;
+            /* Turquoise */
         }
 
-        .container {
-            border: 5px solid black; /* Black border with 1px width */
-            padding: 5px; /* Optional: Add padding for spacing inside the border */
+        #human {
+            /* font-size: 5px; */
+            color: #000;
+            /* Turquoise */
         }
-        #percent{
-            padding:5px;
-            color: #4B0082; /* Indigo */
+
+        #percent {
+            padding: 5px;
+            color: #000;
+            /* Indigo */
         }
+
         canvas {
             margin: 0 auto;
             max-width: 200px;
         }
-        .grid-container {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: 1fr;
-        height: 90vh;
-    }
 
-    .item {
-        border: 1px solid rgb(0, 0, 0);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-        /* background-color: #2a0428; */
-    }
+        #upper-box {
+            height: 33vh;
+            display: table-cell;
+            width: 100vw;
+            padding: 1vh 2vh;
+            vertical-align: middle;
+        }
 
-    .item-1 {
-        grid-column: span 4;
-        grid-row: span 1;
-        padding: 1%;
-        margin: 2%;
-    }
+        #lower-box {
+            margin-top: 4vh;
+            height: 53vh;
+        }
 
-    .item-2 {
-        grid-column: span 2;
-        grid-row: span 1;
-        padding: 0%;
-        margin: 2%;
+        .item-1,
+        .item-2,
+        .item-3 {
+            background-color: #ffffffad;
+        }
 
-         display: grid;
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: 1fr;
-    }
+        .item-2,
+        .item-3 {
+            height: 100%;
+        }
 
-    /* .item-3 {
-        grid-column: span 2;
-        grid-row: span 1;
-        padding: 5%;
-        margin: 2%;
+        .item-2 {
+            padding: 24px;
+            float: left;
+            width: calc(67% - 4vh);
+display: grid;
+vertical-align: middle;
+        }
 
-        display: grid;
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: 1fr;
-    } */
-    .lable1 {
-        max-width: 400px;
-        position: absolute;
-        top: 108%;
-        left: 71%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: rgb(0, 0, 0);
-        z-index: 1;
-        font-size: 16px;
-    }
-    .lable2 {
-        max-width: 200px;
-        position: absolute;
-        top: 89%;
-        left: 60%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: rgb(0, 0, 0);
-        z-index: 1;
-        font-size: 16px;
-    }
-    .percentage_sym{
-        color: white;
-        font-size: 150px;
-    }
-    .pno2{
-        color: aqua;
-    }
-    #heading1{
-        font-size:60px;
-    }
+        .item-3 {
+            float: right;
+            width: 33%;
+            display: grid;
+        }
+
+        .lable1 {
+            max-width: 400px;
+            position: absolute;
+            top: 108%;
+            left: 71%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+            font-size: 16px;
+        }
+
+        .lable2 {
+            max-width: 200px;
+            position: absolute;
+            top: 89%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+            font-size: 16px;
+        }
+
+        .percentage_sym {
+            color: white;
+            font-size: 150px;
+        }
+
+        .pno2 {
+            color: aqua;
+        }
     </style>
 
 </head>
+
 <body>
-
-    <div class="grid-container">
-
-        <div class="item item-1">
-            <div id="pno">
-                <h1></h1>
+    <div class="item item-1" id="upper-box">
+        <div id="pno">
+            <h1>Have you ever experienced negative emotions when ar than yours? emotions when a friend purchased a
+                larger car than yours?</h1>
+        </div>
+    </div>
+    <div id="lower-box">
+        <div class="item item-3" id="chart-box">
+            <div>
+                <div class="lable1"></div>
+                <div class="lable2"></div>
+            </div>
+            <div id="chartContainer">
+                <canvas id="barChart"></canvas>
             </div>
         </div>
-
-        <div class="item item-2">
+        <div class="item item-2" id="result-box">
             <div class="pno3">
-                <h1 id="heading1" >NUMBER OF PEOPLE WHO AGREE</h1>
-                <!-- <h1 >hi</h1> -->
+                <h2 id="heading1">NUMBER OF PEOPLE WHO AGREE</h2>
             </div>
             <div>
-                <span id="countValue">0</span> <span id="pno2" style="color: aliceblue; font-size: 100px;">%</span>
+                <span id="countValue">0</span> <span id="pno2" style="font-size: 100px;">%</span>
             </div>
-            <div class="pno4" >
-                <h1 style="font-size: 90px;" id="heading2">NUMBER OF PEOPLE WHO AGREE</h1>
+            <div class="pno4">
+                <h2 id="heading2">NUMBER OF PEOPLE WHO AGREE</h2>
             </div>
         </div>
     </div>
 
-    <!-- <div> -->
-
-        <!-- <div id="pno">
-            <h1>Have you ever experienced negative emotions when a friend purchased a larger car than yours?</h1>
-        </div> -->
-
-        <!-- <div>
-            <h1 id="countText">Count:</h1>
-        </div> -->
-
-        <!-- <div>
-            <span id="countValue">0</span> <span id="percent" >%</span>
-        </div> -->
-
-        <!-- <div>
-            <h1 id="human"></h1>
-        </div> -->
-
-        <!-- <div id="chartContainer">
-            <canvas id="barChart"></canvas>
-        </div> -->
-
-    <!-- </div> -->
-
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initial data for Bar Chart
+            var initialData = {
+                labels: ['Value 1'],
+                datasets: [{
+                    label: 'Variable',
+                    //data: [100],
+                    data: [10],
+                    backgroundColor: 'white',
+                    borderColor: '#4B0082',
+                    borderWidth: 1
+                }]
+            };
+
+            var initialData2 = {
+                labels: ['Value 2'],
+                datasets: [{
+                    label: 'Variable2',
+                    //data: [100],
+                    data: [10],
+                    backgroundColor: '#40E0D0',
+                    borderColor: '#4B0082',
+                    borderWidth: 1
+                }]
+            };
+
+            // Get canvas element
+            var barCtx = document.getElementById('barChart').getContext('2d');
+
+            // Create Bar Chart
+            var barChart = new Chart(barCtx, {
+                type: 'bar',
+                data: initialData,
+                options: {
+                    maintainAspectRatio: false // Disable maintaining aspect ratio
+                }
+            });
+
             const countValue = document.getElementById('countValue');
             const div = document.getElementById('pno');
             const div2 = document.getElementById('pno2');
@@ -198,95 +226,148 @@
             const percent = document.getElementById('percentage_sym');
             const human = document.getElementById('human');
 
-            const newHTML1 = `<h1 style="font-size: 100px;">Q1 - Did you sleep last night with a roof over your head?</h1>`;
-            const newHTML2 = `<h1 style="font-size: 100px;">Q2 - Did you have dinner before going to bed yesterday?</h1>`;
-            const newHTML3 = `<h1 style="font-size: 100px;">Q3 - Did you have clothes to wear today?</h1>`;
-            const newHTML4 = `<h1 style="font-size: 100px;">Q4 - Do you feel thankful to God for anything in your life?</h1>`;
-            const newHTML5 = `<h1 style="font-size: 100px;">CONGRATULATIONS !!! </h1>`;
+            const newHTML1 = `<h1>DID YOU FEEL ANY SENSE OF DISSATISFACTION AFTER SEEING SOMEONE ELSE'S BIGGER HOUSE?</h1>`;
+            const newHTML2 = `<h1>DID YOU EVER FEEL DISAPPOINTMENT WHEN YOUR FAVORITE DISH WASN'T AVAILABLE?</h1>`;
+            const newHTML3 = `<h1>DID YOU EVER FEEL SAD SEEING YOUR FRIENDS WEAR BRANDED CLOTHES THAT YOU DON’T HAVE?</h1>`;
+            const newHTML4 = `<h1>DID YOU EVER COMPLAIN TO GOD ABOUT ANYTHING?</h1>`;
+            const newHTML5 = `<h1>NOTHING TO WORRY!!! </h1>`;
             const newHTML6 = ` `;
-            const newHTML7 = ``;
+            const newHTML7 = `%`;
 
-            const eventSource = new EventSource('/updates');
+            const newHTML11 = `<h1>DID YOU SLEEP LAST NIGHT WITH A ROOF OVER YOUR HEAD?</h1>`;
+            const newHTML12 = `<h1>DID YOU HAVE DINNER BEFORE GOING TO BED YESTERDAY?</h1>`;
+            const newHTML13 = `<h1>DID YOU HAVE CLOTHES TO WEAR TODAY?</h1>`;
+            const newHTML14 = `<h1>DO YOU FEEL THANKFUL TO GOD FOR ANYTHING IN YOUR LIFE?</h1>`;
+            const newHTML15 = `<h1>CONGRATULATIONS !!! </h1>`;
+            const newHTML16 = ` `;
+            const newHTML17 = ``;
 
-            eventSource.onmessage = (event) => {
-                const integers = JSON.parse(event.data);
-                console.log(integers);
+            function generateRandomNumber() {
+                var randomNumber = Math.random(); // Generate random number between 0 and 1
+                var scaledNumber = randomNumber * (89.9 - 80.1); // Scale to the range 0 to (89.9 - 80.1)
+                var shiftedNumber = scaledNumber + 80.1; // Shift to the range 80.1 to 89.9
+                return shiftedNumber;
+            }
 
-                if (integers[4] == 0) {
-                    div.innerHTML = newHTML1;
-                    div2.innerHTML = newHTML6;
-                    heading1.innerText = "NUMBER OF PEOPLE WHO AGREE";
-                    heading2.innerText = "";
+            const numPeopleAgree = "NUMBER OF PEOPLE WHO AGREE";
 
-                    let numberElement = integers[0];
+            const uiRef = {
+                div,
+                div2,
+                heading1,
+                heading2,
+                countValue,
+                barChart
+            };
+
+            const negativeContent = [{
+                div: newHTML1,
+                div2: newHTML6,
+                heading1: numPeopleAgree,
+                heading2: "",
+            }, {
+                div: newHTML2,
+                div2: newHTML6,
+                heading1: numPeopleAgree,
+                heading2: "",
+            }, {
+                div: newHTML3,
+                div2: newHTML6,
+                heading1: numPeopleAgree,
+                heading2: "",
+            }, {
+                div: newHTML4,
+                div2: newHTML6,
+                heading1: numPeopleAgree,
+                heading2: "",
+            }, {
+                div: newHTML5,
+                div2: newHTML7,
+                heading1: "Around",
+                heading2: "of the people of the world have the same thought",
+            }];
+
+            const positiveContent = [{
+                div: newHTML11,
+                div2: newHTML16,
+                heading1: numPeopleAgree,
+                heading2: "",
+            }, {
+                div: newHTML12,
+                div2: newHTML16,
+                heading1: numPeopleAgree,
+                heading2: "",
+            }, {
+                div: newHTML13,
+                div2: newHTML16,
+                heading1: numPeopleAgree,
+                heading2: "",
+            }, {
+                div: newHTML14,
+                div2: newHTML16,
+                heading1: numPeopleAgree,
+                heading2: "",
+            }, {
+                div: newHTML15,
+                div2: newHTML17,
+                heading1: "750,000,000",
+                heading2: "individuals worldwide do not have their basic necessities fulfilled, consider yourself Fortunate!",
+            }];
+
+
+            function uiUpdate(integers) {console.log(integers)
+                const contentIndex = integers[4];
+		const positive = location.search.indexOf("positive") !== -1;
+                const content = positive ? positiveContent : negativeContent;
+                const contentObj = content[contentIndex];
+		const chartBox = document.getElementById("chart-box");
+		const resultBox = document.getElementById("result-box");
+
+                div.innerHTML = contentObj.div;
+                div2.innerHTML = contentObj.div2;
+                heading1.innerText = positive && contentIndex === 4 ? "" : contentObj.heading1;
+                heading2.innerText = contentObj.heading2;
+ chartBox.style.display = "block";
+        resultBox.style.width = "";
+if (positive) {
+                    document.body.style.backgroundColor = "#e8cbe1";
+                }
+
+                if (contentIndex === 4) {
+                    let a = (integers[0] + integers[1] + integers[2] + integers[3]) / (integers[5]) * 100;
+                    var roundedValue = a.toFixed(2);
+        
+                    countValue.textContent = positive ? contentObj.heading1 : roundedValue;
+                    barChart.data.datasets[0].data = roundedValue;
+
+if (positive) {			
+	chartBox.style.display = "none";
+	resultBox.style.width = "100%";
+}
+                } else {
+                    let numberElement = integers[contentIndex];
                     let number = parseInt(numberElement, 10);
                     let formattedNumber = number.toLocaleString('en-US');
 
-                    countValue.textContent =formattedNumber;
-                    // barChart.data.datasets[0].data = [integers[0]];
-                    // barChart.update();
+                    countValue.textContent = formattedNumber;
+                    barChart.data.datasets[0].data = [integers[contentIndex]];
                 }
-                if (integers[4] == 1) {
-                    div.innerHTML = newHTML2;
-                    div2.innerHTML = newHTML6;
-                    heading1.innerText = "NUMBER OF PEOPLE WHO AGREE";
-                    heading2.innerText = "";
+               
+                barChart.update();
+            }
 
-                    let numberElement1 = integers[1];
-                    let number1 = parseInt(numberElement1, 10);
-                    let formattedNumber1 = number1.toLocaleString('en-US');
+            const eventSource = new EventSource('/updates');
+            var oldData = ""
 
-                    countValue.textContent = formattedNumber1;
-
-                    // barChart.data.datasets[0].data = [integers[1]];
-                    // barChart.update();
-                }
-                if (integers[4] == 2) {
-                    div.innerHTML = newHTML3;
-                    div2.innerHTML = newHTML6;
-                    heading1.innerText = "NUMBER OF PEOPLE WHO AGREE";
-                    heading2.innerText = "";
-
-
-                    let numberElement2 = integers[2];
-                    let number2 = parseInt(numberElement2, 10);
-                    let formattedNumber2 = number2.toLocaleString('en-US');
-
-                    countValue.textContent = formattedNumber2;
-
-                    // barChart.data.datasets[0].data = [integers[2]];
-                    // barChart.update();
-                }
-                if (integers[4] == 3) {
-                    div.innerHTML = newHTML4;
-                    div2.innerHTML = newHTML6;
-                    heading1.innerText = "NUMBER OF PEOPLE WHO AGREE";
-                    heading2.innerText = "";
-
-                    let numberElement3 = integers[3];
-                    let number3 = parseInt(numberElement3, 10);
-                    let formattedNumber3 = number3.toLocaleString('en-US');
-
-                    countValue.textContent = formattedNumber3;
-
-                    // barChart.data.datasets[0].data = [integers[3]];
-                    // barChart.update();
-                }
-                if (integers[4] == 4) {
-                    div.innerHTML = newHTML5;
-                    div2.innerHTML = newHTML7;
-                    heading1.innerText = " ";
-                    heading2.innerText = " 750 million individuals worldwide do not have their basic necessities fulfilled, consider yourself Fortunate!";
-
-                    /* let a=((integers[0]+integers[1]+integers[2]+integers[3])/(integers[0]+integers[1]+integers[2]+integers[3]+1000))*100;
-                    var roundedValue = a.toFixed(2);
-                    console.log(roundedValue); */
-
-                    countValue.textContent = '';
-                    // barChart.data.datasets[0].data = [750000000];
-                    // barChart.update();
-                }
+            eventSource.onmessage = (event) => {
+//                if (oldData !== event.data) {
+                    oldData = event.data;
+                    uiUpdate(JSON.parse(event.data));
+ //               }
+                
             };
+        });
     </script>
 </body>
+
 </html>

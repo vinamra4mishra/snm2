@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
     <title>Count Page</title>
-      <script src="http://192.168.0.105:3000/chart"></script>
+      <!-- <script src="http://192.168.0.105:3000/chart"></script> -->
    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"> -->
 
    </script>
     <style>
         body {
-            background-color: #310e2f;
+            background-color: #dca9da;
             color: #4B0082; /* Indigo for text */
             font-family: Arial, sans-serif;
             margin: 10%;
@@ -21,22 +21,22 @@
         }
         h1 {
             padding:5px;
-            color: #ffffff; /* Indigo */
+            color: #211111; /* Indigo */
             font-size: 50px;
         }
         h3 {
             padding:5px;
-            color: #ffffff; /* Indigo */
+            color: #211111;  /* Indigo */
         }
         h2 {
             padding:5px;
-            color: #ffffff; /* Indigo */
+            color: #211111;  /* Indigo */
             font-size: 35px;
         }
 
         #countValue {
-            font-size: 188px;
-            color: #ffffff; /* Turquoise */
+            font-size: 240px;
+            color: #211111;   /* Turquoise */
         }
         #human {
             /* font-size: 5px; */
@@ -51,6 +51,7 @@
         .container {
             border: 5px solid black; /* Black border with 1px width */
             padding: 5px; /* Optional: Add padding for spacing inside the border */
+            margin-top: 10px;
         }
         #percent{
             padding:5px;
@@ -62,32 +63,32 @@
         }
         .grid-container {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: 1fr 1fr;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 1fr;
         height: 90vh;
     }
 
     .item {
-        border: 1px solid rgb(255, 255, 255);
+        border: 1px solid rgb(0, 0, 0);
         display: flex;
         align-items: center;
         justify-content: center;
         margin: auto;
-margin-top: 15px;
-        /*g* background-color: #2a0428; */
+        margin-top: 100px;
+        /* background-color: #2a0428; */
     }
 
     .item-1 {
         grid-column: span 4;
         grid-row: span 1;
-        padding: 5%;
+        padding: 1%;
         margin: 2%;
     }
 
     .item-2 {
         grid-column: span 2;
         grid-row: span 1;
-        padding: 7%;
+        padding: 0%;
         margin: 2%;
 
          display: grid;
@@ -95,16 +96,16 @@ margin-top: 15px;
         grid-template-columns: 1fr;
     }
 
-    .item-3 {
+    /* .item-3 {
         grid-column: span 2;
         grid-row: span 1;
         padding: 5%;
         margin: 2%;
 
         display: grid;
-        grid-template-rows: auto 1fr auto; /* Three rows, with first and third auto-sized and second taking up remaining space */
-        grid-template-columns: 1fr; /* One column */
-    }
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 1fr;
+    } */
     .lable1 {
         max-width: 400px;
         position: absolute;
@@ -112,7 +113,7 @@ margin-top: 15px;
         left: 71%;
         transform: translate(-50%, -50%);
         text-align: center;
-        color: white;
+        color: rgb(0, 0, 0);
         z-index: 1;
         font-size: 16px;
     }
@@ -123,7 +124,7 @@ margin-top: 15px;
         left: 60%;
         transform: translate(-50%, -50%);
         text-align: center;
-        color: white;
+        color: rgb(0, 0, 0);
         z-index: 1;
         font-size: 16px;
     }
@@ -134,6 +135,9 @@ margin-top: 15px;
     .pno2{
         color: aqua;
     }
+    #heading1{
+        font-size:60px;
+    }
     </style>
 
 </head>
@@ -143,34 +147,20 @@ margin-top: 15px;
 
         <div class="item item-1">
             <div id="pno">
-                <h1>Have you ever experienced negative emotions when a friend purchased a larger car than yours?</h1>
+                <h1></h1>
             </div>
         </div>
 
         <div class="item item-2">
             <div class="pno3">
-                <h2 id="heading1" >NUMBER OF PEOPLE WHO AGREE</h2>
+                <h1 id="heading1" >NUMBER OF PEOPLE WHO AGREE</h1>
+                <!-- <h1 >hi</h1> -->
             </div>
             <div>
                 <span id="countValue">0</span> <span id="pno2" style="color: aliceblue; font-size: 100px;">%</span>
             </div>
             <div class="pno4" >
-                <h2 id="heading2">NUMBER OF PEOPLE WHO AGREE</h2>
-            </div>
-        </div>
-
-        <div class="item item-3" >
-
-            <div class="lable1"><!-- <h3>
-                saints who agreed
-            </h3> --></div>
-            <div class="lable2"><!-- <h3>
-                saints visited
-            </h3> --></div>
-            <div>
-            </div>
-            <div id="chartContainer" style="text-align: center;">
-                <canvas id="barChart"></canvas>
+                <h1 style="font-size: 90px;" id="heading2">NUMBER OF PEOPLE WHO AGREE</h1>
             </div>
         </div>
     </div>
@@ -200,44 +190,6 @@ margin-top: 15px;
     <!-- </div> -->
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initial data for Bar Chart
-            var initialData = {
-                labels: ['Value 1'],
-                datasets: [{
-                    label: 'Variable',
-                    //data: [100],
-                     data: [10],
-                    backgroundColor: 'white',
-                    borderColor: '#4B0082',
-                    borderWidth: 1
-                }]
-            };
-
-            var initialData2 = {
-                labels: ['Value 2'],
-                datasets: [{
-                    label: 'Variable2',
-                    //data: [100],
-                     data: [10],
-                    backgroundColor: '#40E0D0',
-                    borderColor: '#4B0082',
-                    borderWidth: 1
-                }]
-            };
-
-            // Get canvas element
-            var barCtx = document.getElementById('barChart').getContext('2d');
-
-            // Create Bar Chart
-            var barChart = new Chart(barCtx, {
-                type: 'bar',
-                data: initialData,
-                options: {
-                    maintainAspectRatio: false // Disable maintaining aspect ratio
-                }
-            });
-
             const countValue = document.getElementById('countValue');
             const div = document.getElementById('pno');
             const div2 = document.getElementById('pno2');
@@ -248,25 +200,13 @@ margin-top: 15px;
             const percent = document.getElementById('percentage_sym');
             const human = document.getElementById('human');
 
-            const newHTML1 = `<h1>1 - Did you feel jealous looking at someone's bigger
-home?</h1>`;
-            const newHTML2 = `<h1>2 - Did you ever feel disappointed when your favorite
-dish was unavailable?</h1>`;
-            const newHTML3 = `<h1>3 - Did you ever feel sad seeing your friends wear
-branded clothes that you can't buy?</h1>`;
-            const newHTML4 = `<h1>4 - Did you ever complain about anything to God?</h1>`;
-            const newHTML5 = `<h1 style="font-size: 60px;">Let’s See The Results.....Nothing To Worry !!! </h1>`;
+            const newHTML1 = `<h1 style="font-size: 100px;">Q1 - DID YOU SLEEP LAST NIGHT WITH A ROOF OVER YOUR HEAD?</h1>`;
+            const newHTML2 = `<h1 style="font-size: 100px;">Q2 - DID YOU HAVE DINNER BEFORE GOING TO BED YESTERDAY?</h1>`;
+            const newHTML3 = `<h1 style="font-size: 100px;">Q3 - DID YOU HAVE CLOTHES TO WEAR TODAY?</h1>`;
+            const newHTML4 = `<h1 style="font-size: 100px;">Q4 - DO YOU FEEL THANKFUL TO GOD FOR ANYTHING IN YOUR LIFE?</h1>`;
+            const newHTML5 = `<h1 style="font-size: 100px;">CONGRATULATIONS !!! </h1>`;
             const newHTML6 = ` `;
-            const newHTML7 = `%`;               
-
-            function generateRandomNumber() {
-            var randomNumber = Math.random(); // Generate random number between 0 and 1
-            var scaledNumber = randomNumber * (89.9 - 80.1); // Scale to the range 0 to (89.9 - 80.1)
-            var shiftedNumber = scaledNumber + 80.1; // Shift to the range 80.1 to 89.9
-  return shiftedNumber;
-}
-
-
+            const newHTML7 = ``;
 
             const eventSource = new EventSource('/updates');
 
@@ -285,8 +225,8 @@ branded clothes that you can't buy?</h1>`;
                     let formattedNumber = number.toLocaleString('en-US');
 
                     countValue.textContent =formattedNumber;
-                    barChart.data.datasets[0].data = [integers[0]];
-                    barChart.update();
+                    // barChart.data.datasets[0].data = [integers[0]];
+                    // barChart.update();
                 }
                 if (integers[4] == 1) {
                     div.innerHTML = newHTML2;
@@ -300,8 +240,8 @@ branded clothes that you can't buy?</h1>`;
 
                     countValue.textContent = formattedNumber1;
 
-                    barChart.data.datasets[0].data = [integers[1]];
-                    barChart.update();
+                    // barChart.data.datasets[0].data = [integers[1]];
+                    // barChart.update();
                 }
                 if (integers[4] == 2) {
                     div.innerHTML = newHTML3;
@@ -316,8 +256,8 @@ branded clothes that you can't buy?</h1>`;
 
                     countValue.textContent = formattedNumber2;
 
-                    barChart.data.datasets[0].data = [integers[2]];
-                    barChart.update();
+                    // barChart.data.datasets[0].data = [integers[2]];
+                    // barChart.update();
                 }
                 if (integers[4] == 3) {
                     div.innerHTML = newHTML4;
@@ -331,25 +271,24 @@ branded clothes that you can't buy?</h1>`;
 
                     countValue.textContent = formattedNumber3;
 
-                    barChart.data.datasets[0].data = [integers[3]];
-                    barChart.update();
+                    // barChart.data.datasets[0].data = [integers[3]];
+                    // barChart.update();
                 }
                 if (integers[4] == 4) {
                     div.innerHTML = newHTML5;
                     div2.innerHTML = newHTML7;
-                    heading1.innerText = "Around ";
-                    heading2.innerText = "of the people of the world have the same thought";
+                    heading1.innerText = " ";
+                    heading2.innerText = " 750 million individuals worldwide do not have their basic necessities fulfilled, consider yourself Fortunate!";
 
-                    let a=((integers[0]+integers[1]+integers[2]+integers[3])/(integers[0]+integers[1]+integers[2]+integers[3]+172))*100;
+                    /* let a=((integers[0]+integers[1]+integers[2]+integers[3])/(integers[0]+integers[1]+integers[2]+integers[3]+1000))*100;
                     var roundedValue = a.toFixed(2);
-                    console.log(roundedValue);
+                    console.log(roundedValue); */
 
-                    countValue.textContent = roundedValue;
-                    barChart.data.datasets[0].data = [roundedValue];
-                    barChart.update();
+                    countValue.textContent = '';
+                    // barChart.data.datasets[0].data = [750000000];
+                    // barChart.update();
                 }
             };
-        });
     </script>
 </body>
 </html>

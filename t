@@ -1,7 +1,6 @@
-# Read the decimal value from the file
+ # Read the decimal value from the file
 import RPi.GPIO as GPIO
 from time import sleep  # Import the sleep function
-import random
 
 # Code with only 1 button as input for all the responses
 # for e.g. if question 1 is being displayed then button press will increment count for response A and so on
@@ -11,8 +10,7 @@ GPIO.setmode(GPIO.BOARD)
 count = 250
 
 # safeguarding so if the button is pressed when result screen is displayed so extra element
-response_value = [0, 0, 0, 0, 0, 0]
-response_total = 1.0000
+response_value = [0, 0, 0, 0, 0]
 
 """
 # Commenting to try single button response
@@ -89,8 +87,6 @@ with open('/home/snm/server/data/a.txt', 'r') as file:
     response_value[2] = int(lines[2].strip())  # Convert the string to a int
     # Read line 5 and extract the number as a decimal
     response_value[3] = int(lines[3].strip())  # Convert the string to a int
-    # sum of all responses till now 
-    # response_total = float(lines[5].strip())  # Convert the string to a int
 
 try:
     while 1:
@@ -144,16 +140,7 @@ try:
             # Write the updated decimal value back to the file
             with open('/home/snm/server/data/a.txt', 'r') as file:
                 lines = file.readlines()
-                # response_total = float(lines[5].strip())  # Convert the string to a int
-                print("BeforE") 
-                print(response_total) 
                 lines[response_to_disp] = str(new_response) + '\n'
-                response_total = 1 + response_value[0] + response_value[1] + response_value[2] + response_value[3]
-                print(response_total) 
-                response_total1 = response_total / random.uniform(0.8, 0.9) 
-                print("After") 
-                print(response_total1) 
-                lines[5] = str(response_total1) + '\n' 
             with open('/home/snm/server/data/a.txt', 'w') as file:
                 file.writelines(lines)
             GPIO.output(buttonLEDOutput, True)
